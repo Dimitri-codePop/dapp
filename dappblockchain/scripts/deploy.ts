@@ -3,10 +3,10 @@ async function main() {
   const SimpleStorage = await ethers.getContractFactory("SimpleStorage");
   const simpleStorage = await SimpleStorage.deploy();
 
-  await simpleStorage.deployed();
+  await simpleStorage.waitForDeployment();
 
   console.log(
-    `SimpleStorage deployed to ${simpleStorage.address}`
+    `SimpleStorage deployed to ${await simpleStorage.getAddress()}`
   );
 }
 
