@@ -1,5 +1,6 @@
 {
   "name": "hardhat-project",
+  "version": "1.0.0",
   "devDependencies": {
     "@ethersproject/abi": "^5.7.0",
     "@ethersproject/providers": "^5.7.2",
@@ -16,5 +17,11 @@
     "hardhat-gas-reporter": "^1.0.9",
     "solidity-coverage": "^0.8.4",
     "typechain": "^8.2.0"
+  },
+  "scripts": {
+    "test": "npx hardhat test",
+    "node": "npx hardhat node",
+    "compile": "npx hardhat compile",
+    "deploy": "npx hardhat run ./scripts/deploy.ts --network localhost"
   }
 }
