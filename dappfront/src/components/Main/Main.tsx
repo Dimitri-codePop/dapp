@@ -12,7 +12,7 @@ export const Main = () => {
     string | null
   >(null);
   const [favoriteNumberInBlockchain, setFavoriteNumberInBlockchain] =
-    React.useState<string | null>(null);
+    React.useState<number | null>(null);
 
   React.useEffect(() => {
     if (isConnected) {
@@ -27,7 +27,7 @@ export const Main = () => {
       provider
     );
     let favoriteNumber = await contract.getNumber();
-    setFavoriteNumberInBlockchain(favoriteNumber.toString());
+    setFavoriteNumberInBlockchain(Number(favoriteNumber));
   };
 
   const changeFavoriteNumber = async () => {
