@@ -21,13 +21,22 @@ export const Main = () => {
   }, [address]);
 
   const getDatas = async () => {
-    const contract = new ethers.Contract(
-      "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-      Contract.abi,
-      provider
-    );
-    let favoriteNumber = await contract.getNumber();
-    setFavoriteNumberInBlockchain(Number(favoriteNumber));
+    try {
+      const contract = new ethers.Contract(
+        "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+        Contract.abi,
+        provider
+      );
+      if (contract) {
+        const favoriteNumber = await contract.getNumber();
+        setFavoriteNumberInBlockchain(Number(favoriteNumber));
+        setFavoriteNumberInput(null);
+      }
+    } catch (error: any) {
+      console.log(error);
+
+      throw new Error(error);
+    }
   };
 
   const changeFavoriteNumber = async () => {
@@ -56,6 +65,7 @@ export const Main = () => {
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400sm:text-sm sm:leading-6"
             placeholder="Your favorite number"
             onChange={(e) => setFavoriteNumberInput(e.target.value)}
+            value={favoriteNumberInput || ""}
           />
           <button
             className="rounded bg-indigo-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
